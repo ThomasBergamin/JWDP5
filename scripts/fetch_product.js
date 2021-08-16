@@ -6,8 +6,8 @@ const displayElement = (element, className = "", HTMLTag, target) => {
   emptyTarget.appendChild(elementToDisplay);
 };
 
-const getCamera = () =>
-  fetch("http://localhost:3000/api/cameras/5be1ed3f1c9d44000030b061")
+const getCameraFromAPI = (cameraID) =>
+  fetch(`http://localhost:3000/api/cameras/${cameraID}`)
     .then(function (res) {
       if (res.ok) {
         return res.json();
@@ -21,4 +21,13 @@ const getCamera = () =>
       console.log(err);
     });
 
-getCamera();
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const cameraId = urlParams.get("id");
+
+getCameraFromAPI(cameraId);
+
+// TO DO : Get ID from URL
+// TO DO : Call API with ID
+// TO DO : Display infos
+// TO DO : Add to cart feature = stocker ID dans le sessionStorage
