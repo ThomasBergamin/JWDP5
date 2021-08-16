@@ -17,17 +17,25 @@ const getCamerasFromAPI = async () => {
 
 const renderCameras = async () => {
   let cameras = sessionStorage.getItem("camerasData");
+
   if (cameras) {
     cameras = JSON.parse(sessionStorage.getItem("camerasData"));
   } else {
     cameras = await getCamerasFromAPI();
   }
   sessionStorage.setItem("camerasData", JSON.stringify(cameras));
+
   let htmlToDisplay = "";
-  cameras.forEach((camera) => {
-    const arrayPrice = Array.from(camera.price.toString());
+
+  const formatPrice = (price) => {
+    const arrayPrice = Array.from(price.toString());
     arrayPrice.splice(-2, 0, ",");
-    const cameraPrice = arrayPrice.join("");
+    let cleanPrice = arrayPrice.join("");
+    return cleanPrice;
+  };
+
+  cameras.forEach((camera) => {
+    const cameraPrice = formatPrice(camera.price);
     let htmlSegment = `<div class="col">
     <div class="card mt-4">
       <img src="${camera.imageUrl}" class="card-img-top" alt="..." />
