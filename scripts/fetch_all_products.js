@@ -1,10 +1,14 @@
 /* Fetch camera list from the API & returns them */
 
-const getCameras = async () => {
+const getCamerasFromAPI = async () => {
   try {
     let response = await fetch("http://localhost:3000/api/cameras");
-    return await response.json();
+    return response.json();
   } catch (error) {
+    let htmlAlert = `<div class="alert alert-warning" role="alert">
+    There was an error while loading cameras !</div>`;
+    let container = document.querySelector(".cameras-container");
+    container.innerHTML = htmlAlert;
     console.log(error);
   }
 };
@@ -12,27 +16,38 @@ const getCameras = async () => {
 /* Function to render cameras fetched into the HTML */
 
 const renderCameras = async () => {
-  let cameras = await getCameras();
-  let html = "";
+  let cameras = sessionStorage.getItem("camerasData");
+  if (cameras) {
+    cameras = JSON.parse(sessionStorage.getItem("camerasData"));
+  } else {
+    cameras = await getCamerasFromAPI();
+  }
+  sessionStorage.setItem("camerasData", JSON.stringify(cameras));
+  let htmlToDisplay = "";
   cameras.forEach((camera) => {
+    const arrayPrice = Array.from(camera.price.toString());
+    arrayPrice.splice(-2, 0, ",");
+    const cameraPrice = arrayPrice.join("");
     let htmlSegment = `<div class="col">
     <div class="card mt-4">
       <img src="${camera.imageUrl}" class="card-img-top" alt="..." />
       <div class="card-body">
         <h5 class="card-title">${camera.name}</h5>
         <p class="card-text lead text-success">
-          <strong>259,99€</strong>
+          <strong>${cameraPrice + "€"}</strong>
         </p>
       </div>
       <div class="card-footer">
-        <a href="http://127.0.0.1:5500/pages/product.html?id=${camera._id}" class="btn btn-primary">Go to product page</a>
+        <a href="/pages/product.html?id=${
+          camera._id
+        }" class="btn btn-primary">Go to product page</a>
       </div>
     </div>
   </div>`;
-    html += htmlSegment;
+    htmlToDisplay += htmlSegment;
   });
   let container = document.querySelector(".cameras-container");
-  container.innerHTML = html;
+  container.innerHTML = htmlToDisplay;
 };
 
 renderCameras();
