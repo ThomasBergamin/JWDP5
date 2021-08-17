@@ -1,33 +1,96 @@
-const displayElement = (element, className = "", HTMLTag, target) => {
-  const elementToDisplay = document.createElement(HTMLTag);
-  elementToDisplay.classList.add(className);
-  elementToDisplay.innerHTML = element.name + " " + element.price;
-  let emptyTarget = document.getElementById(target);
-  emptyTarget.appendChild(elementToDisplay);
+const getCameraFromAPI = async (cameraId) => {
+  try {
+    let response = await fetch(`http://localhost:3000/api/cameras/${cameraId}`);
+    return response.json();
+  } catch (error) {
+    let htmlAlert = `<div class="alert alert-warning" role="alert">
+      There was an error while loading the product id=${camera} !</div>`;
+    let container = document.getElementById("emptyDiv");
+    container.innerHTML = htmlAlert;
+    console.log(error);
+  }
 };
-
-const getCameraFromAPI = (cameraID) =>
-  fetch(`http://localhost:3000/api/cameras/${cameraID}`)
-    .then(function (res) {
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .then(function (camera) {
-      displayElement(camera, "list-group-item", "li", "emptyDiv");
-      console.log(cameras_list);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const cameraId = urlParams.get("id");
+// Security check with REGEX
 
-getCameraFromAPI(cameraId);
+const getCameraData = async () => {
+  const camerasData = JSON.parse(sessionStorage.getItem("camerasData"));
+  if (camerasData) {
+    camerasData.forEach((camera) => {
+      if (cameraId == camera._id) {
+        cameraData = camera;
+      }
+    });
+  } else {
+    cameraData = await getCameraFromAPI(cameraId);
+  }
+  return cameraData;
+};
 
-// TO DO : Get ID from URL
-// TO DO : Call API with ID
+console.log(
+  getCameraData().then(function (camera) {
+    displayCamera(camera);
+  })
+);
+
+const displayCamera = (camera) => {
+  const formatPrice = (price) => {
+    const arrayPrice = Array.from(price.toString());
+    arrayPrice.splice(-2, 0, ",");
+    let cleanPrice = arrayPrice.join("");
+    return cleanPrice;
+  };
+
+  camera.price = formatPrice(camera.price);
+
+  let htmlLenses = ``;
+
+  camera.lenses.forEach((lens) => {
+    htmlLenses += `<div class="form-check">
+    <input
+      class="form-check-input"
+      type="radio"
+      name="flexRadioDefault"
+      id="flexRadioDefault1"
+      checked
+    />
+    <label class="form-check-label" for="flexRadioDefault1">
+      ${lens}
+    </label>
+  </div>`;
+  });
+
+  let htmlCamera = `<div class="row">
+  <div class="col-6">
+    <img
+      class="img-fluid rounded"
+      src="${camera.imageUrl}"
+      alt="Camera"
+    />
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <h5 class="card-header text-center">${camera.name}</h5>
+      <div class="card-body">
+        <p class="card-text mt-3">
+        ${camera.description}
+        </p>
+        <h4 class="card-subtitle mb-2 mt-5">Lenses</h4>
+        ${htmlLenses}
+        <h1 class="card-title mt-5">${camera.price}€</h1>
+      </div>
+      <div class="card-footer text-center">
+        <button class="btn btn-success">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</div>`;
+  let container = document.getElementById("emptyDiv");
+  container.innerHTML = htmlCamera;
+  return;
+};
 // TO DO : Display infos
 // TO DO : Add to cart feature = stocker ID dans le sessionStorage
