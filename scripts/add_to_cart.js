@@ -17,10 +17,6 @@ const getSelectedQuantity = () => {
 }; */
 
 const addToCart = (cameraId) => {
-  const htmlNotification = `<span class="badge bg-danger rounded-pill">New</span>`;
-  let container = document.getElementById("emptyNotification");
-  container.innerHTML = htmlNotification;
-
   const camerasInCart = JSON.parse(sessionStorage.getItem("cart"));
   getSelectedQuantity();
   /* getSelectedLens(); */
@@ -40,7 +36,6 @@ const addToCart = (cameraId) => {
             camera.lens = lens;
           }
           camera.quantity = camera.quantity + quantity;
-          console.log(camera.quantity);
         }
         sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
       });
@@ -51,4 +46,5 @@ const addToCart = (cameraId) => {
       JSON.stringify([{ cameraId: cameraId, lens: lens, quantity: quantity }])
     );
   }
+  renderCartLabel();
 };
