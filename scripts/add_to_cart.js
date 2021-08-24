@@ -1,19 +1,58 @@
+let quantity = 0;
+let lens = [""];
+
+const getSelectedQuantity = () => {
+  quantity = document.getElementById("select_lenses").value;
+};
+
+/* const getSelectedLens = (camera) => {
+  lenses = camera.lenses;
+  lenses.forEach((cameraLense) => {
+    cameralLense = document.getElementById(lens);
+    if (cameraLense.is(":checked")) {
+      lens.push(cameraLense);
+    }
+    console.log("lens", lens);
+  });
+}; */
+
 const addToCart = (cameraId) => {
   const htmlNotification = `<span class="badge bg-danger rounded-pill">New</span>`;
   let container = document.getElementById("emptyNotification");
   container.innerHTML = htmlNotification;
-  const itemsInCart = JSON.parse(sessionStorage.getItem("cart"));
-  if (itemsInCart) {
-    const camerasInCart = itemsInCart.cameras;
-    if (!camerasInCart.includes(cameraId)) {
-      sessionStorage.setItem(
-        "cart",
-        JSON.stringify({ cameras: [...camerasInCart, cameraId] })
-      );
+
+  const camerasInCart = JSON.parse(sessionStorage.getItem("cart"));
+  getSelectedQuantity();
+  /* getSelectedLens(); */
+
+  if (camerasInCart) {
+    if (!camerasInCart.some((camera) => camera.cameraId === cameraId)) {
+      camerasInCart.push({
+        cameraId: cameraId,
+        lens: lens,
+        quantity: quantity,
+      });
+      sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
     } else {
-      console.log("camera already in cart");
+      console.log("changing");
+      camerasInCart.forEach((camera) => {
+        if (camera.cameraId === cameraId) {
+          if (camera.lens !== lens) {
+            camera.lens = lens;
+          }
+          if (camera.quantity !== quantity) {
+            console.log("quantity", quantity);
+            console.log("camera quantity", camera.quantity);
+            camera.quantity = quantity;
+          }
+        }
+        sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
+      });
     }
   } else {
-    sessionStorage.setItem("cart", JSON.stringify({ cameras: [cameraId] }));
+    sessionStorage.setItem(
+      "cart",
+      JSON.stringify([{ cameraId: cameraId, lens: lens, quantity: quantity }])
+    );
   }
 };

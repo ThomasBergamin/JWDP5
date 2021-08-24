@@ -14,7 +14,9 @@ const getCameraFromAPI = async (cameraId) => {
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const cameraId = urlParams.get("id");
+
 // Security check with REGEX
+const checkID = new RegExp("^[A-Za-z0-9_-]*$");
 
 const getCameraData = async () => {
   const camerasData = JSON.parse(sessionStorage.getItem("camerasData"));
@@ -54,10 +56,10 @@ const displayCamera = (camera) => {
       class="form-check-input"
       type="radio"
       name="flexRadioDefault"
-      id="flexRadioDefault1"
+      id=${lens}
       checked
     />
-    <label class="form-check-label" for="flexRadioDefault1">
+    <label class="form-check-label" for=${lens}>
       ${lens}
     </label>
   </div>`;
@@ -83,13 +85,13 @@ const displayCamera = (camera) => {
         <h1 class="card-title mt-5">${camera.price}€</h1>
       </div>
       <div class="card-footer text-center">
-      <select class="form-select text-center form-select-sm mb-3 mt-3" aria-label=".form-select-sm example">
+      <select id='select_lenses' onchange='getSelectedQuantity()' class="form-select text-center form-select-sm mb-3 mt-3" aria-label=".form-select-sm example">
       <option selected>Quantity</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
-      <option value="3">4</option>
-      <option value="3">5</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
       </select>
         <button class="btn btn-success" onclick='addToCart("${camera._id}")'>Add to cart</button>
       </div>
@@ -100,5 +102,3 @@ const displayCamera = (camera) => {
   container.innerHTML = htmlCamera;
   return;
 };
-// TO DO : Display infos
-// TO DO : Add to cart feature = stocker ID dans le sessionStorage
