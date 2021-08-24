@@ -86,8 +86,8 @@ const displayCamera = (camera) => {
       </div>
       <div class="card-footer text-center">
       <select id='select_lenses' onchange='getSelectedQuantity()' class="form-select text-center form-select-sm mb-3 mt-3" aria-label=".form-select-sm example">
-      <option selected>Quantity</option>
-      <option value="1">1</option>
+      <option >Quantity</option>
+      <option selected value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>

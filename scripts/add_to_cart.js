@@ -2,7 +2,7 @@ let quantity = 0;
 let lens = [""];
 
 const getSelectedQuantity = () => {
-  quantity = document.getElementById("select_lenses").value;
+  quantity = parseInt(document.getElementById("select_lenses").value);
 };
 
 /* const getSelectedLens = (camera) => {
@@ -34,17 +34,13 @@ const addToCart = (cameraId) => {
       });
       sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
     } else {
-      console.log("changing");
       camerasInCart.forEach((camera) => {
         if (camera.cameraId === cameraId) {
           if (camera.lens !== lens) {
             camera.lens = lens;
           }
-          if (camera.quantity !== quantity) {
-            console.log("quantity", quantity);
-            console.log("camera quantity", camera.quantity);
-            camera.quantity = quantity;
-          }
+          camera.quantity = camera.quantity + quantity;
+          console.log(camera.quantity);
         }
         sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
       });
