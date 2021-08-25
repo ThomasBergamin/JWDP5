@@ -1,5 +1,5 @@
 let quantity = 0;
-let selectedLens = [""];
+let selectedLens = "";
 
 const getSelectedQuantity = () => {
   quantity = parseInt(document.getElementById("select_lenses").value);
@@ -36,7 +36,6 @@ const addToCart = async (cameraId) => {
       sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
     } else {
       camerasInCart.forEach((camera) => {
-        console.log(selectedLens);
         if (camera.cameraId === cameraId) {
           camera.quantity = camera.quantity + quantity;
         }
