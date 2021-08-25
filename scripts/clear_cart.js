@@ -1,4 +1,4 @@
 const clearCart = () => {
   sessionStorage.removeItem("cart");
-  renderCartLabel();
+  document.location.reload();
 };
