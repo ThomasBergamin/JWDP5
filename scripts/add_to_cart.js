@@ -1,41 +1,47 @@
 let quantity = 0;
-let lens = [""];
+let selectedLens = [""];
 
 const getSelectedQuantity = () => {
   quantity = parseInt(document.getElementById("select_lenses").value);
 };
 
-/* const getSelectedLens = (camera) => {
-  lenses = camera.lenses;
-  lenses.forEach((cameraLense) => {
-    cameralLense = document.getElementById(lens);
-    if (cameraLense.is(":checked")) {
-      lens.push(cameraLense);
-    }
-    console.log("lens", lens);
-  });
-}; */
+const changeSelectedLens = async () => {
+  await getCameraData()
+    .then((camera) => {
+      lenses = camera.lenses;
+      lenses.forEach((cameraLense) => {
+        lens = document.getElementById(cameraLense);
+        if (lens.checked) {
+          if (selectedLens != lens.id) {
+            selectedLens = lens.id;
+          }
+        }
+      });
+    })
+    .catch((error) => console.log(error));
+};
 
-const addToCart = (cameraId) => {
+const addToCart = async (cameraId) => {
   const camerasInCart = JSON.parse(sessionStorage.getItem("cart"));
   getSelectedQuantity();
-  /* getSelectedLens(); */
+  await changeSelectedLens();
 
   if (camerasInCart) {
     if (!camerasInCart.some((camera) => camera.cameraId === cameraId)) {
       camerasInCart.push({
         cameraId: cameraId,
-        lens: lens,
+        lens: selectedLens,
         quantity: quantity,
       });
       sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
     } else {
       camerasInCart.forEach((camera) => {
+        console.log(selectedLens);
         if (camera.cameraId === cameraId) {
-          if (camera.lens !== lens) {
-            camera.lens = lens;
-          }
           camera.quantity = camera.quantity + quantity;
+        }
+        if (camera.lens != selectedLens) {
+          camera.lens = selectedLens;
         }
         sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
       });
@@ -43,7 +49,9 @@ const addToCart = (cameraId) => {
   } else {
     sessionStorage.setItem(
       "cart",
-      JSON.stringify([{ cameraId: cameraId, lens: lens, quantity: quantity }])
+      JSON.stringify([
+        { cameraId: cameraId, lens: selectedLens, quantity: quantity },
+      ])
     );
   }
   renderCartLabel();

@@ -56,10 +56,10 @@ const displayCamera = (camera) => {
       class="form-check-input"
       type="radio"
       name="flexRadioDefault"
-      id=${lens}
+      id="${lens}"
       checked
     />
-    <label class="form-check-label" for=${lens}>
+    <label class="form-check-label" for="${lens}">
       ${lens}
     </label>
   </div>`;
