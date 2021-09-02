@@ -6,11 +6,12 @@ const getSelectedQuantity = () => {
 };
 
 const changeSelectedLens = async () => {
+  // eslint-disable-next-line no-undef
   await getCameraData()
     .then((camera) => {
-      lenses = camera.lenses;
+      let lenses = camera.lenses;
       lenses.forEach((cameraLense) => {
-        lens = document.getElementById(cameraLense);
+        let lens = document.getElementById(cameraLense);
         if (lens.checked) {
           if (selectedLens != lens.id) {
             selectedLens = lens.id;
@@ -21,6 +22,7 @@ const changeSelectedLens = async () => {
     .catch((error) => console.log(error));
 };
 
+// eslint-disable-next-line no-unused-vars
 const addToCart = async (cameraId) => {
   const camerasInCart = JSON.parse(sessionStorage.getItem("cart"));
   getSelectedQuantity();
@@ -41,6 +43,7 @@ const addToCart = async (cameraId) => {
       ])
     );
   }
+  // eslint-disable-next-line no-undef
   renderCartLabel();
   // action visuelle pour l'utilisateur
 };

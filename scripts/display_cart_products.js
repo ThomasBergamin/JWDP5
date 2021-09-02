@@ -1,10 +1,10 @@
 const getProductsInCart = () => {
-  products = sessionStorage.getItem("cart");
+  let products = sessionStorage.getItem("cart");
   return products;
 };
 
 const renderProducts = () => {
-  cameras = getProductsInCart();
+  let cameras = getProductsInCart();
   if (cameras) {
     console.log(cameras);
   } else {
