@@ -16,9 +16,7 @@ const displayShoppingCart = () => {
 
     cameras.forEach((camera) => {
       const cameraPrice = parseInt(camera.price);
-      console.log(cameraPrice);
       totalPrice += cameraPrice;
-      console.log(totalPrice);
       let row = `<tr>
                 <th scope="row">${rowIndex}</th>
                 <td>${camera.name}</td>
