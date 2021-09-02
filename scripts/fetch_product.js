@@ -20,23 +20,18 @@ const checkID = new RegExp("^[A-Za-z0-9]*$");
 
 const getCameraData = async () => {
   const camerasData = JSON.parse(sessionStorage.getItem("camerasData"));
+  let cameraInfos;
   if (camerasData) {
     camerasData.forEach((camera) => {
       if (cameraId == camera._id) {
-        cameraData = camera;
+        cameraInfos = camera;
       }
     });
   } else {
-    cameraData = await getCameraFromAPI(cameraId);
+    cameraInfos = await getCameraFromAPI(cameraId);
   }
-  return cameraData;
+  return cameraInfos;
 };
-
-console.log(
-  getCameraData().then(function (camera) {
-    displayCamera(camera);
-  })
-);
 
 const displayCamera = (camera) => {
   const formatPrice = (price) => {
@@ -101,3 +96,7 @@ const displayCamera = (camera) => {
   container.innerHTML = htmlCamera;
   return;
 };
+
+getCameraData().then(function (camera) {
+  displayCamera(camera);
+});
