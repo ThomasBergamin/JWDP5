@@ -14,14 +14,12 @@ const getCamerasFromAPI = async () => {
 };
 
 const getCamerasData = async () => {
-  let cameras = sessionStorage.getItem("camerasData");
+  let cameras = JSON.parse(sessionStorage.getItem("camerasData"));
 
-  if (cameras) {
-    cameras = JSON.parse(sessionStorage.getItem("camerasData"));
-  } else {
+  if (!cameras) {
     cameras = await getCamerasFromAPI();
+    sessionStorage.setItem("camerasData", JSON.stringify(cameras));
   }
-  sessionStorage.setItem("camerasData", JSON.stringify(cameras));
 
   return cameras;
 };
