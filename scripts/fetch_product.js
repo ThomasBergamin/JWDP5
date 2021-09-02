@@ -135,6 +135,14 @@ const displayCamera = (camera) => {
   return;
 };
 
-getCameraData(cameraId).then((camera) => {
-  displayCamera(camera);
-});
+const checkAndDisplayCamera = async () => {
+  if (await checkId(cameraId)) {
+    getCameraData(cameraId).then((camera) => {
+      displayCamera(camera);
+    });
+  } else {
+    console.log("pas bon"); // Display an error on page
+  }
+};
+
+checkAndDisplayCamera();
