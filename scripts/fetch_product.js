@@ -1,10 +1,10 @@
 const getCameraFromAPI = async (cameraId) => {
   try {
-    let response = await fetch(`http://localhost:3000/api/cameras/${cameraId}`);
+    let response = await fetch(`http://localhost:3000/api/cameras/${cameraId}`); // change hard coded url of back ent
     return response.json();
   } catch (error) {
     let htmlAlert = `<div class="alert alert-warning" role="alert">
-      There was an error while loading the product id=${camera} !</div>`;
+      There was an error while loading the product id=${cameraId} !</div>`;
     let container = document.getElementById("emptyDiv");
     container.innerHTML = htmlAlert;
     console.log(error);
