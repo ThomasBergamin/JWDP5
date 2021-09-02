@@ -39,19 +39,24 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const cameraId = urlParams.get("id");
 
-const checkId = async (Id) => {
-  // check with Regex
-  // check if ID match with a camera
-  // eslint-disable-next-line no-undef
-  const cameras = await getCamerasData();
-  console.log(cameras);
+const checkId = async (id) => {
+  // Security check with REGEX
+  const regexID = new RegExp("^[A-Za-z0-9]*$");
+  const isIdCorrect = id.match(regexID);
+  if (isIdCorrect) {
+    const cameras = await getCamerasData();
+    const cameraFound = cameras.some((camera) => camera._id === id);
+    if (cameraFound) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
 };
-checkId(cameraId);
 
-// Security check with REGEX
-const checkID = new RegExp("^[A-Za-z0-9]*$");
-
-const getCameraData = async () => {
+const getCameraData = async (cameraId) => {
   const camerasData = JSON.parse(sessionStorage.getItem("camerasData"));
   let cameraInfos;
   if (camerasData) {
@@ -130,6 +135,6 @@ const displayCamera = (camera) => {
   return;
 };
 
-getCameraData().then(function (camera) {
+getCameraData(cameraId).then((camera) => {
   displayCamera(camera);
 });
