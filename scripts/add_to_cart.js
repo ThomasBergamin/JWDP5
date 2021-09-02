@@ -42,4 +42,5 @@ const addToCart = async (cameraId) => {
     );
   }
   renderCartLabel();
+  // action visuelle pour l'utilisateur
 };
