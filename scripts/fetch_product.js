@@ -16,7 +16,7 @@ const urlParams = new URLSearchParams(queryString);
 const cameraId = urlParams.get("id");
 
 // Security check with REGEX
-const checkID = new RegExp("^[A-Za-z0-9_-]*$");
+const checkID = new RegExp("^[A-Za-z0-9]*$");
 
 const getCameraData = async () => {
   const camerasData = JSON.parse(sessionStorage.getItem("camerasData"));

@@ -27,24 +27,12 @@ const addToCart = async (cameraId) => {
   await changeSelectedLens();
 
   if (camerasInCart) {
-    if (!camerasInCart.some((camera) => camera.cameraId === cameraId)) {
-      camerasInCart.push({
-        cameraId: cameraId,
-        lens: selectedLens,
-        quantity: quantity,
-      });
-      sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
-    } else {
-      camerasInCart.forEach((camera) => {
-        if (camera.cameraId === cameraId) {
-          camera.quantity = camera.quantity + quantity;
-        }
-        if (camera.lens != selectedLens) {
-          camera.lens = selectedLens;
-        }
-        sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
-      });
-    }
+    camerasInCart.push({
+      cameraId: cameraId,
+      lens: selectedLens,
+      quantity: quantity,
+    });
+    sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
   } else {
     sessionStorage.setItem(
       "cart",
