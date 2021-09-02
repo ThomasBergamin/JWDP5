@@ -37,7 +37,6 @@ const addToCart = async (cameraId) => {
     camerasToPush.push({
       cameraId: cameraId,
       lens: selectedLens,
-      quantity: quantity,
     });
   }
 
