@@ -31,7 +31,47 @@
     </nav>
     <main>
       <section id="main_content">
-        <div class="container mt-5" id="emptyDiv"></div><button onclick='clearCart()'>Clear cart</button>
+        <div class="container mt-5" id="emptyDiv">
+          <table class="table table-striped table-hover table-bordered">
+            <thead class="table-primary">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Camera Name</th>
+                <th scope="col">Lens</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>120€</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>150€</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry the Bird</td>
+                <td>28.5mm</td>
+                <td>300€</td>
+              </tr>
+            </tbody>
+            <tfoot class="table-primary">
+              <tr>
+                <th scope="row">Total</th>
+                <td>--</td>
+                <td>--</td>
+                <td>570€</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <button class='btn btn-outline-danger' onclick='clearCart()'>Clear cart</button>
       </section>
     </main>
   </div>
