@@ -5,9 +5,9 @@ const getSelectedQuantity = () => {
   quantity = parseInt(document.getElementById("select_lenses").value);
 };
 
-const changeSelectedLens = async () => {
+const changeSelectedLens = async (cameraId) => {
   // eslint-disable-next-line no-undef
-  await getCameraData()
+  await getCameraData(cameraId)
     .then((camera) => {
       let lenses = camera.lenses;
       lenses.forEach((cameraLense) => {
@@ -26,7 +26,7 @@ const changeSelectedLens = async () => {
 const addToCart = async (cameraId) => {
   const camerasInCart = JSON.parse(sessionStorage.getItem("cart"));
   getSelectedQuantity();
-  await changeSelectedLens();
+  await changeSelectedLens(cameraId);
 
   if (camerasInCart) {
     camerasInCart.push({

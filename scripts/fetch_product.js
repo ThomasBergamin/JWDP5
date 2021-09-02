@@ -40,7 +40,6 @@ const urlParams = new URLSearchParams(queryString);
 const cameraId = urlParams.get("id");
 
 const checkId = async (id) => {
-  // Security check with REGEX
   const regexID = new RegExp("^[A-Za-z0-9]*$");
   const isIdCorrect = id.match(regexID);
   if (isIdCorrect) {
