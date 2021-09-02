@@ -135,14 +135,17 @@ const displayCamera = (camera) => {
   return;
 };
 
-const checkAndDisplayCamera = async () => {
+const checkIdAndDisplayCamera = async () => {
   if (await checkId(cameraId)) {
     getCameraData(cameraId).then((camera) => {
       displayCamera(camera);
     });
   } else {
-    console.log("pas bon"); // Display an error on page
+    let htmlAlert = `<div class="alert alert-danger" role="alert">
+    No camera match with this ID :-(</div>`;
+    let container = document.getElementById("emptyDiv");
+    container.innerHTML = htmlAlert;
   }
 };
 
-checkAndDisplayCamera();
+checkIdAndDisplayCamera();
