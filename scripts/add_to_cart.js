@@ -28,21 +28,20 @@ const addToCart = async (cameraId) => {
   getSelectedQuantity();
   await changeSelectedLens(cameraId);
 
+  let camerasToPush = [];
   if (camerasInCart) {
-    camerasInCart.push({
+    camerasToPush = [...camerasInCart];
+  }
+
+  for (let i = 0; i < quantity; i++) {
+    camerasToPush.push({
       cameraId: cameraId,
       lens: selectedLens,
       quantity: quantity,
     });
-    sessionStorage.setItem("cart", JSON.stringify(camerasInCart));
-  } else {
-    sessionStorage.setItem(
-      "cart",
-      JSON.stringify([
-        { cameraId: cameraId, lens: selectedLens, quantity: quantity },
-      ])
-    );
   }
+
+  sessionStorage.setItem("cart", JSON.stringify(camerasToPush));
   // eslint-disable-next-line no-undef
   renderCartLabel();
   // action visuelle pour l'utilisateur
