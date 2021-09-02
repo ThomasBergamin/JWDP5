@@ -27,21 +27,32 @@ const addToCart = async (cameraId) => {
   const camerasInCart = JSON.parse(sessionStorage.getItem("cart"));
   getSelectedQuantity();
   await changeSelectedLens(cameraId);
-
-  let camerasToPush = [];
-  if (camerasInCart) {
-    camerasToPush = [...camerasInCart];
-  }
-
-  for (let i = 0; i < quantity; i++) {
-    camerasToPush.push({
-      cameraId: cameraId,
-      lens: selectedLens,
-    });
-  }
-
-  sessionStorage.setItem("cart", JSON.stringify(camerasToPush));
   // eslint-disable-next-line no-undef
-  renderCartLabel();
-  // action visuelle pour l'utilisateur
+  await getCameraData(cameraId).then((camera) => {
+    console.log(camera);
+    console.log("triggered");
+    let camerasToPush = [];
+    if (camerasInCart) {
+      camerasToPush = [...camerasInCart];
+    }
+
+    for (let i = 0; i < quantity; i++) {
+      const formatPrice = (price) => {
+        const arrayPrice = Array.from(price.toString());
+        arrayPrice.splice(-2, 0, ",");
+        let cleanPrice = arrayPrice.join("");
+        return cleanPrice;
+      };
+      const cameraPrice = formatPrice(camera.price);
+      camerasToPush.push({
+        cameraId: cameraId,
+        lens: selectedLens,
+        name: camera.name,
+        price: cameraPrice,
+      });
+    }
+    sessionStorage.setItem("cart", JSON.stringify(camerasToPush));
+    // eslint-disable-next-line no-undef
+    renderCartLabel();
+  });
 };

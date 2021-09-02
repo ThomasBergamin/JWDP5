@@ -12,15 +12,21 @@ const displayShoppingCart = () => {
   if (cameras) {
     let tableRowsHTML = "";
     let rowIndex = 1;
+    let totalPrice = 0;
 
     cameras.forEach((camera) => {
+      const cameraPrice = parseInt(camera.price);
+      console.log(cameraPrice);
+      totalPrice += cameraPrice;
+      console.log(totalPrice);
       let row = `<tr>
                 <th scope="row">${rowIndex}</th>
+                <td>${camera.name}</td>
                 <td>${camera.lens}</td>
-                <td>${camera.lens}</td>
-                <td>${camera.cameraId}</td>
+                <td>${camera.price}€</td>
               </tr>`;
       tableRowsHTML = tableRowsHTML.concat(row);
+      rowIndex++;
     });
 
     let tableHTML = `<table class="table table-striped table-hover table-bordered">
@@ -40,7 +46,7 @@ const displayShoppingCart = () => {
                 <th scope="row">Total</th>
                 <td>--</td>
                 <td>--</td>
-                <td class="fw-bold">570€</td>
+                <td class="fw-bold">${totalPrice},00€</td> 
               </tr>
             </tfoot>
           </table>`;
