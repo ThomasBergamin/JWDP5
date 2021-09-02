@@ -11,9 +11,42 @@ const getCameraFromAPI = async (cameraId) => {
   }
 };
 
+const getCamerasFromAPI = async () => {
+  try {
+    let response = await fetch("http://localhost:3000/api/cameras");
+    return response.json();
+  } catch (error) {
+    let htmlAlert = `<div class="alert alert-warning" role="alert">
+    There was an error while loading cameras !</div>`;
+    let container = document.querySelector(".cameras-container");
+    container.innerHTML = htmlAlert;
+    console.log(error);
+  }
+};
+
+const getCamerasData = async () => {
+  let cameras = JSON.parse(sessionStorage.getItem("camerasData"));
+
+  if (!cameras) {
+    cameras = await getCamerasFromAPI();
+    sessionStorage.setItem("camerasData", JSON.stringify(cameras));
+  }
+
+  return cameras;
+};
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const cameraId = urlParams.get("id");
+
+const checkId = async (Id) => {
+  // check with Regex
+  // check if ID match with a camera
+  // eslint-disable-next-line no-undef
+  const cameras = await getCamerasData();
+  console.log(cameras);
+};
+checkId(cameraId);
 
 // Security check with REGEX
 const checkID = new RegExp("^[A-Za-z0-9]*$");
