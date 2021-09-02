@@ -13,9 +13,7 @@ const getCamerasFromAPI = async () => {
   }
 };
 
-/* Function to render cameras fetched into the HTML */
-
-const renderCameras = async () => {
+const getCamerasData = async () => {
   let cameras = sessionStorage.getItem("camerasData");
 
   if (cameras) {
@@ -24,6 +22,14 @@ const renderCameras = async () => {
     cameras = await getCamerasFromAPI();
   }
   sessionStorage.setItem("camerasData", JSON.stringify(cameras));
+
+  return cameras;
+};
+
+/* Function to render cameras fetched into the HTML */
+
+const renderCameras = async () => {
+  let cameras = await getCamerasData();
 
   let htmlToDisplay = "";
 
