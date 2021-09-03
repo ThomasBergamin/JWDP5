@@ -49,34 +49,33 @@
       </section>
       <section id='form'>
         <div class="container">
-          <form class="invisible row" id='cartForm'>
+          <form class="invisible row" id='cartForm' >
             <h3 class="mt-5 mb-4">Order form</h3>
             <div class="mb-3 col-md-6">
               <label for="clientName" class="form-label">First Name</label>
-              <input type="text" required class="form-control" id="clientName">
+              <input type="text" required class="form-control" id="clientName" pattern="[A-Za-z' -]+">
             </div>
             <div class="mb-3 col-md-6">
               <label for="clientLastname" class="form-label">Last name</label>
-              <input type="text" required class="form-control" id="clientLastname">
+              <input type="text" required class="form-control" id="clientLastname" pattern="[A-Za-z' -]+">
             </div>
             <div class="mb-3 col-12">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <label for="clientEmail" class="form-label">Email address</label>
+              <input type="email" required class="form-control" id="clientEmail" aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col-12">
-              <label for="clientAddress" class="form-label">Address</label>
-              <input type="text" required placeholder="123 Sesame Street" class="form-control" id="clientAddress">
+              <label for="clientAddress" class="form-label" >Address</label>
+              <input type="text" required placeholder="123 Sesame Street" pattern="[0-9A-Za-z' -]+" class="form-control" id="clientAddress">
             </div>
             <div class="mb-3 col-md-8">
               <label for="clientCity" class="form-label">City</label>
-              <input type="text" required placeholder="New York City" class="form-control" id="clientCity">
+              <input type="text" required placeholder="New York City" pattern="[A-Za-z' -]+" class="form-control" id="clientCity">
             </div>
             <div class="mb-3 col-md-4">
-              <label for="clientZip" class="form-label">Zip Code</label>
+              <label for="clientZip" class="form-label" pattern="[0-9]">Zip Code</label>
               <input type="number" required placeholder="35200" class="form-control" id="clientZip">
             </div>  
-            <div class="col-12 mb-5"><button type="submit" class="btn btn-primary">Submit</button></div>          
-            
+            <div class="col-12 mb-5"><button id='submitFormBtn' type="submit" class="btn btn-primary">Submit</button></div>          
           </form>
         </div>
       </section>
@@ -90,7 +89,8 @@
   <script src="../scripts/render_cart_label.js" type="module"></script>
   <script src="../scripts/clear_cart.js" type="module"></script>
   <script src="../scripts/display_form.js" type="module"></script>
-  <script src="../scripts/display_cart_products.js" type="text/javascript"></script>
+  <script src="../scripts/form_validation.js" type="module"></script>
+  <script src="../scripts/display_cart_products.js" type="module"></script>
 </body>
 
 </html>
