@@ -1,13 +1,38 @@
 let quantity = 0;
 let selectedLens = "";
+const getCameraFromAPI = async (cameraId) => {
+  try {
+    let response = await fetch(`http://localhost:3000/api/cameras/${cameraId}`); // change hard coded url of back ent
+    return response.json();
+  } catch (error) {
+    let htmlAlert = `<div class="alert alert-warning" role="alert">
+      There was an error while loading the product id=${cameraId} !</div>`;
+    let container = document.getElementById("emptyDiv");
+    container.innerHTML = htmlAlert;
+    console.log(error);
+  }
+};
+const getOneCamera = async (cameraId) => {
+  const camerasData = JSON.parse(sessionStorage.getItem("camerasData"));
+  let cameraInfos;
+  if (camerasData) {
+    camerasData.forEach((camera) => {
+      if (cameraId == camera._id) {
+        cameraInfos = camera;
+      }
+    });
+  } else {
+    cameraInfos = await getCameraFromAPI(cameraId);
+  }
+  return cameraInfos;
+};
 
 const getSelectedQuantity = () => {
   quantity = parseInt(document.getElementById("select_lenses").value);
 };
 
 const changeSelectedLens = async (cameraId) => {
-  // eslint-disable-next-line no-undef
-  await getCameraData(cameraId)
+  await getOneCamera(cameraId)
     .then((camera) => {
       let lenses = camera.lenses;
       lenses.forEach((cameraLense) => {
@@ -28,7 +53,7 @@ const addToCart = async (cameraId) => {
   getSelectedQuantity();
   await changeSelectedLens(cameraId);
   // eslint-disable-next-line no-undef
-  await getCameraData(cameraId).then((camera) => {
+  await getOneCamera(cameraId).then((camera) => {
     console.log(camera);
     console.log("triggered");
     let camerasToPush = [];
