@@ -49,33 +49,37 @@
       </section>
       <section id='form'>
         <div class="container">
-          <form class="invisible row" id='cartForm' >
+          <form class="invisible row" id='cartForm'>
             <h3 class="mt-5 mb-4">Order form</h3>
             <div class="mb-3 col-md-6">
               <label for="clientName" class="form-label">First Name</label>
-              <input type="text" required class="form-control" id="clientName" pattern="[A-Za-z' -]+">
+              <input type="text" required class="form-control" minlength="2" id="clientName" pattern="[A-Za-z' -]+">
             </div>
             <div class="mb-3 col-md-6">
               <label for="clientLastname" class="form-label">Last name</label>
-              <input type="text" required class="form-control" id="clientLastname" pattern="[A-Za-z' -]+">
+              <input type="text" required class="form-control" minlength="2" id="clientLastname" pattern="[A-Za-z' -]+">
             </div>
             <div class="mb-3 col-12">
               <label for="clientEmail" class="form-label">Email address</label>
-              <input type="email" required class="form-control" id="clientEmail" aria-describedby="emailHelp">
+              <input type="email" required class="form-control" minlength="4" id="clientEmail"
+                aria-describedby="emailHelp">
             </div>
             <div class="mb-3 col-12">
-              <label for="clientAddress" class="form-label" >Address</label>
-              <input type="text" required placeholder="123 Sesame Street" pattern="[0-9A-Za-z' -]+" class="form-control" id="clientAddress">
+              <label for="clientAddress" class="form-label">Address</label>
+              <input type="text" required placeholder="123 Sesame Street" minlength="6" pattern="[0-9A-Za-z' -]+"
+                class="form-control" id="clientAddress">
             </div>
             <div class="mb-3 col-md-8">
               <label for="clientCity" class="form-label">City</label>
-              <input type="text" required placeholder="New York City" pattern="[A-Za-z' -]+" class="form-control" id="clientCity">
+              <input type="text" required placeholder="New York City" minlength="2" pattern="[A-Za-z' -]+"
+                class="form-control" id="clientCity">
             </div>
             <div class="mb-3 col-md-4">
-              <label for="clientZip" class="form-label" pattern="[0-9]">Zip Code</label>
+              <label for="clientZip" class="form-label" pattern="[0-9]" minlength="4">Zip Code</label>
               <input type="number" required placeholder="35200" class="form-control" id="clientZip">
-            </div>  
-            <div class="col-12 mb-5"><button id='submitFormBtn' type="submit" class="btn btn-primary">Submit</button></div>          
+            </div>
+            <div class="col-12 mb-5">
+              <button id='submitFormBtn' type="button" class="btn btn-primary">Submit</button></div>
           </form>
         </div>
       </section>
