@@ -1,5 +1,5 @@
-import { getOneCamera } from "../modules/getCameras.js";
-import { renderCartLabel } from "../modules/renderCartLabel.js";
+import { getOneCamera } from "../utils/getCameras.js";
+import { renderCartLabel } from "../utils/renderCartLabel.js";
 
 let quantity = 0;
 let selectedLens = "";

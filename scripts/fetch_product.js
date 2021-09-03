@@ -1,4 +1,4 @@
-import { getOneCamera, getAllCameras } from "../modules/getCameras.js";
+import { getOneCamera, getAllCameras } from "../utils/getCameras.js";
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);

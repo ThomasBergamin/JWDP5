@@ -1,3 +1,3 @@
-import { renderCartLabel } from "../modules/renderCartLabel.js";
+import { renderCartLabel } from "../utils/renderCartLabel.js";
 
 window.onload = renderCartLabel();
