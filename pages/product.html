@@ -44,6 +44,38 @@
         <section id="main_content">
           <div class="container mt-5" id="emptyDiv"></div>
         </section>
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div id="modalContent" class="modal-content">
+              <div class="modal-body">
+                You're going to add
+                <span class="fw-bold">1x Camera HonkJS 500</span> to your cart
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-bs-dismiss="modal"
+                >
+                  Validate and add to cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
     <link
@@ -57,7 +89,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    <script src="../scripts/fetch_product.js" type="text/javascript"></script>
+    <script src="../scripts/fetch_product.js" type="module"></script>
     <script src="../scripts/add_to_cart.js" type="text/javascript"></script>
     <script
       src="../scripts/render_cart_label.js"

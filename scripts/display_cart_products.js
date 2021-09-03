@@ -7,7 +7,7 @@ const displayShoppingCart = () => {
   const cameras = getCamerasFromCart();
 
   let contentToDisplay = `<div class="alert alert-primary" role="alert">
-    You have no product in your cart :-(</div>`;
+    You have no products in your cart :-(</div>`;
 
   if (cameras) {
     let tableRowsHTML = "";
