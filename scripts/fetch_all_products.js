@@ -1,33 +1,9 @@
-/* Fetch camera list from the API & returns them */
-
-const getCamerasFromAPI = async () => {
-  try {
-    let response = await fetch("http://localhost:3000/api/cameras");
-    return response.json();
-  } catch (error) {
-    let htmlAlert = `<div class="alert alert-warning" role="alert">
-    There was an error while loading cameras !</div>`;
-    let container = document.querySelector(".cameras-container");
-    container.innerHTML = htmlAlert;
-    console.log(error);
-  }
-};
-
-const getCamerasData = async () => {
-  let cameras = JSON.parse(sessionStorage.getItem("camerasData"));
-
-  if (!cameras) {
-    cameras = await getCamerasFromAPI();
-    sessionStorage.setItem("camerasData", JSON.stringify(cameras));
-  }
-
-  return cameras;
-};
+import { getAllCameras } from "../utils/getCameras.js";
 
 /* Function to render cameras fetched into the HTML */
 
 const renderCameras = async () => {
-  let cameras = await getCamerasData();
+  let cameras = await getAllCameras();
 
   let htmlToDisplay = "";
 
