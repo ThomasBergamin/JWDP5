@@ -1,6 +1,5 @@
 const displayOrder = () => {
   const orderInfos = JSON.parse(sessionStorage.getItem("order"));
-  console.log(orderInfos);
   let totalPrice = 0;
   const formatPrice = (price) => {
     const arrayPrice = Array.from(price.toString());

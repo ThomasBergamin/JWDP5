@@ -37,7 +37,6 @@ const submitForm = async () => {
     city: clientCity.value,
   };
   const dataToSend = { contact: contact, products: ordersId };
-  console.log(dataToSend, "data sent");
 
   const rawResponse = await fetch("http://localhost:3000/api/cameras/order", {
     method: "POST",
@@ -49,14 +48,12 @@ const submitForm = async () => {
   });
 
   const orderResponse = await rawResponse.json();
-  console.log(orderResponse, "response");
   const regexUUID = new RegExp(
     "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
   );
   const isOrderIdCorrect = regexUUID.test(orderResponse.orderId);
 
   if (isOrderIdCorrect) {
-    console.log("beau");
     sessionStorage.setItem("order", JSON.stringify(orderResponse));
     sessionStorage.removeItem("cart");
     window.location.replace("../pages/order_success.html");

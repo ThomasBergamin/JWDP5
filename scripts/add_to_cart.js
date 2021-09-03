@@ -48,8 +48,6 @@ const addToCart = async () => {
   getSelectedQuantity();
   await getSelectedLens(cameraId);
   await getOneCamera(cameraId).then((camera) => {
-    console.log(camera);
-    console.log("triggered");
     let camerasToPush = [];
     if (camerasInCart) {
       camerasToPush = [...camerasInCart];
