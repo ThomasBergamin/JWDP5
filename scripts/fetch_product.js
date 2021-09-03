@@ -49,14 +49,14 @@ const displayCamera = (camera) => {
   });
 
   let htmlCamera = `<div class="row">
-  <div class="col-6">
+  <div class="col-md-6">
     <img
       class="img-fluid rounded"
       src="${camera.imageUrl}"
       alt="Camera"
     />
   </div>
-  <div class="col-6">
+  <div class="col-md-6 mb-3">
     <div class="card">
       <h5 class="card-header text-center">${camera.name}</h5>
       <div class="card-body">
