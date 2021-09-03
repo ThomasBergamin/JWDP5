@@ -29,15 +29,52 @@
           </ul>
         </div>
     </nav>
-    <main><section id="title">
-          <div class="container mt-4">
-            <h1 class="text-center">Your shopping cart</h1>
-          </div>
-        </section>
+    <main>
+      <section id="title">
+        <div class="container mt-4">
+          <h1 class="text-center">Your shopping cart</h1>
+        </div>
+      </section>
       <section id="main_content">
         <div class="container mt-4" id="emptyDiv">
         </div>
-        <button id='clearCartBtn' class='btn btn-outline-danger'>Clear cart</button>
+        <div class="container">
+          <button id='orderBtn' class='btn btn-success'>
+            Order now !
+          </button>
+          <button id='clearCartBtn' class='btn btn-outline-danger'>
+            Clear cart
+          </button>
+        </div>
+      </section>
+      <section id='form'>
+        <div class="container">
+          <form class="visible" id='cartForm'>
+            <h3 class="mt-5 mb-4">Order form</h3>
+            <div class="mb-3">
+              <label for="clientName" class="form-label">First Name</label>
+              <input type="text" required class="form-control" id="clientName">
+            </div>
+            <div class="mb-3">
+              <label for="clientLastname" class="form-label">Last name</label>
+              <input type="text" required class="form-control" id="clientLastname">
+            </div>
+            <div class="mb-3">
+              <label for="clientAddress" class="form-label">Address</label>
+              <input type="text" required class="form-control" id="clientAddress">
+            </div>
+            <div class="mb-3">
+              <label for="clientCity" class="form-label">City</label>
+              <input type="text" required class="form-control" id="clientCity">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
       </section>
     </main>
   </div>
@@ -48,6 +85,7 @@
   </script>
   <script src="../scripts/render_cart_label.js" type="module"></script>
   <script src="../scripts/clear_cart.js" type="module"></script>
+  <script src="../scripts/display_form.js" type="module"></script>
   <script src="../scripts/display_cart_products.js" type="text/javascript"></script>
 </body>
 
