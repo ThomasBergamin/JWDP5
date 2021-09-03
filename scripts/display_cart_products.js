@@ -62,6 +62,7 @@ const displayShoppingCart = () => {
 
   let container = document.getElementById("emptyDiv");
   container.innerHTML = contentToDisplay;
+
   return;
 };
 
