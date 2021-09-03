@@ -67,15 +67,15 @@ const displayCamera = (camera) => {
         <h1 class="card-title mt-5">${camera.price}€</h1>
       </div>
       <div class="card-footer text-center">
-      <select id='select_lenses' onchange='getSelectedQuantity()' class="form-select text-center form-select-sm mb-3 mt-3" aria-label=".form-select-sm example">
+      <select id='select_lenses' class="form-select text-center form-select-sm mb-3 mt-3" aria-label=".form-select-sm example">
       <option selected value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option>
       </select>
-        <button class="btn btn-success"  data-bs-toggle="modal"
-          data-bs-target="#exampleModal" onclick='addToCart("${camera._id}")'>Add to cart</button>
+        <button id='addToCartBtn' class="btn btn-success"  data-bs-toggle="modal"
+          data-bs-target="#exampleModal">Add to cart</button>
       </div>
     </div>
   </div>

@@ -1,37 +1,14 @@
+import { getOneCamera } from "../modules/getCameras.js";
+import { renderCartLabel } from "../modules/renderCartLabel.js";
+
 let quantity = 0;
 let selectedLens = "";
-const getCameraFromAPI = async (cameraId) => {
-  try {
-    let response = await fetch(`http://localhost:3000/api/cameras/${cameraId}`); // change hard coded url of back ent
-    return response.json();
-  } catch (error) {
-    let htmlAlert = `<div class="alert alert-warning" role="alert">
-      There was an error while loading the product id=${cameraId} !</div>`;
-    let container = document.getElementById("emptyDiv");
-    container.innerHTML = htmlAlert;
-    console.log(error);
-  }
-};
-const getOneCamera = async (cameraId) => {
-  const camerasData = JSON.parse(sessionStorage.getItem("camerasData"));
-  let cameraInfos;
-  if (camerasData) {
-    camerasData.forEach((camera) => {
-      if (cameraId == camera._id) {
-        cameraInfos = camera;
-      }
-    });
-  } else {
-    cameraInfos = await getCameraFromAPI(cameraId);
-  }
-  return cameraInfos;
-};
 
-const getSelectedQuantity = () => {
+export const getSelectedQuantity = () => {
   quantity = parseInt(document.getElementById("select_lenses").value);
 };
 
-const changeSelectedLens = async (cameraId) => {
+export const changeSelectedLens = async (cameraId) => {
   await getOneCamera(cameraId)
     .then((camera) => {
       let lenses = camera.lenses;
@@ -47,12 +24,13 @@ const changeSelectedLens = async (cameraId) => {
     .catch((error) => console.log(error));
 };
 
-// eslint-disable-next-line no-unused-vars
-const addToCart = async (cameraId) => {
+export const addToCart = async () => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const cameraId = urlParams.get("id");
   const camerasInCart = JSON.parse(sessionStorage.getItem("cart"));
   getSelectedQuantity();
   await changeSelectedLens(cameraId);
-  // eslint-disable-next-line no-undef
   await getOneCamera(cameraId).then((camera) => {
     console.log(camera);
     console.log("triggered");
@@ -77,7 +55,8 @@ const addToCart = async (cameraId) => {
       });
     }
     sessionStorage.setItem("cart", JSON.stringify(camerasToPush));
-    // eslint-disable-next-line no-undef
     renderCartLabel();
   });
 };
+
+document.getElementById("addToCartBtn").addEventListener("click", addToCart);
