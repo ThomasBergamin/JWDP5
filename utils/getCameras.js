@@ -1,6 +1,6 @@
 const getCameraFromAPI = async (cameraId) => {
   try {
-    let response = await fetch(`http://localhost:3000/api/cameras/${cameraId}`); // change hard coded url of back ent
+    let response = await fetch(`http://localhost:3000/api/cameras/${cameraId}`); // change base url of back ent
     return response.json();
   } catch (error) {
     let htmlAlert = `<div class="alert alert-warning" role="alert">

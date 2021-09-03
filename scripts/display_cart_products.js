@@ -49,6 +49,15 @@ const displayShoppingCart = () => {
             </tfoot>
           </table>`;
     contentToDisplay = tableHTML;
+  } else {
+    let btnContainer = document.getElementById("emptyBtn");
+    btnContainer.innerHTML = `<button id='backHome' class='btn btn-primary'>
+            Go back to products
+          </button>`;
+    let backHomeBtn = document.getElementById("backHome");
+    backHomeBtn.addEventListener("click", () => {
+      location.href = "../index.html";
+    });
   }
 
   let container = document.getElementById("emptyDiv");
