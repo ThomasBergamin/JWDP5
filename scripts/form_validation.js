@@ -49,10 +49,19 @@ const submitForm = async () => {
   });
 
   const orderResponse = await rawResponse.json();
-  console.log(orderResponse);
+  console.log(orderResponse, "response");
   const regexUUID = new RegExp(
     "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
   );
   const isOrderIdCorrect = regexUUID.test(orderResponse.orderId);
-  console.log(isOrderIdCorrect);
+
+  if (isOrderIdCorrect) {
+    console.log("beau");
+    sessionStorage.setItem("order", JSON.stringify(orderResponse));
+    window.location.replace("../pages/order_success.html");
+    // set orderResponse in session Storage
+    // redirect to order success
+  } else {
+    console.log("erreur"); // display an errory saying there was an error with back end response
+  }
 };
