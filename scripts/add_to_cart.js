@@ -8,7 +8,7 @@ const getSelectedQuantity = () => {
   quantity = parseInt(document.getElementById("select_lenses").value);
 };
 
-const changeSelectedLens = async (cameraId) => {
+const getSelectedLens = async (cameraId) => {
   await getOneCamera(cameraId)
     .then((camera) => {
       let lenses = camera.lenses;
@@ -24,13 +24,29 @@ const changeSelectedLens = async (cameraId) => {
     .catch((error) => console.log(error));
 };
 
+const displayInfosToModal = async () => {
+  getSelectedQuantity();
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const cameraId = urlParams.get("id");
+  await getSelectedLens(cameraId);
+  await getOneCamera(cameraId).then((camera) => {
+    const modalBody = `
+                You're going to add
+                <span class="fw-bold">${quantity}x ${camera.name}</span> with the lens <span class="fw-bold">${selectedLens}</span> to your cart 
+              `;
+    let modal = document.getElementById("modalContent");
+    modal.innerHTML = modalBody;
+  });
+};
+
 const addToCart = async () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const cameraId = urlParams.get("id");
   const camerasInCart = JSON.parse(sessionStorage.getItem("cart"));
   getSelectedQuantity();
-  await changeSelectedLens(cameraId);
+  await getSelectedLens(cameraId);
   await getOneCamera(cameraId).then((camera) => {
     console.log(camera);
     console.log("triggered");
@@ -59,4 +75,9 @@ const addToCart = async () => {
   });
 };
 
-document.getElementById("addToCartBtn").addEventListener("click", addToCart);
+document
+  .getElementById("addToCartBtn")
+  .addEventListener("click", displayInfosToModal);
+document
+  .getElementById("validateAddToCart")
+  .addEventListener("click", addToCart);
