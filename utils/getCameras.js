@@ -18,7 +18,7 @@ const getCamerasFromAPI = async () => {
   } catch (error) {
     let htmlAlert = `<div class="alert alert-warning" role="alert">
     There was an error while loading cameras !</div>`;
-    let container = document.querySelector(".cameras-container");
+    let container = document.getElementById("errorContainer");
     container.innerHTML = htmlAlert;
     console.log(error);
   }
