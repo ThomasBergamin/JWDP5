@@ -28,11 +28,10 @@ export const getAllCameras = async () => {
   let cameras = JSON.parse(sessionStorage.getItem("camerasData"));
 
   if (!cameras) {
-    cameras = await getCamerasFromAPI()
-      .then(sessionStorage.setItem("camerasData", JSON.stringify(cameras)))
-      .catch((error) => {
-        console.log(error);
-      });
+    cameras = await getCamerasFromAPI();
+    if (cameras) {
+      sessionStorage.setItem("camerasData", JSON.stringify(cameras));
+    }
   }
 
   return cameras;
