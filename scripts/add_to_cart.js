@@ -4,11 +4,11 @@ import { renderCartLabel } from "../modules/renderCartLabel.js";
 let quantity = 0;
 let selectedLens = "";
 
-export const getSelectedQuantity = () => {
+const getSelectedQuantity = () => {
   quantity = parseInt(document.getElementById("select_lenses").value);
 };
 
-export const changeSelectedLens = async (cameraId) => {
+const changeSelectedLens = async (cameraId) => {
   await getOneCamera(cameraId)
     .then((camera) => {
       let lenses = camera.lenses;
@@ -24,7 +24,7 @@ export const changeSelectedLens = async (cameraId) => {
     .catch((error) => console.log(error));
 };
 
-export const addToCart = async () => {
+const addToCart = async () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const cameraId = urlParams.get("id");
