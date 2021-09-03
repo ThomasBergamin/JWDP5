@@ -88,9 +88,17 @@ const displayCamera = (camera) => {
 
 const checkIdAndDisplayCamera = async () => {
   if (await checkId(cameraId)) {
-    getOneCamera(cameraId).then((camera) => {
-      displayCamera(camera);
-    });
+    getOneCamera(cameraId)
+      .then((camera) => {
+        displayCamera(camera);
+      })
+      .catch((error) => {
+        console.log(error);
+        let htmlAlert = `<div class="alert alert-danger" role="alert">
+    There was an error while retrieving cameras :-(</div>`;
+        let container = document.getElementById("emptyDiv");
+        container.innerHTML = htmlAlert;
+      });
   } else {
     let htmlAlert = `<div class="alert alert-danger" role="alert">
     No camera match with this ID :-(</div>`;
