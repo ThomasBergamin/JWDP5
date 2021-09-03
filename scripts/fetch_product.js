@@ -7,7 +7,7 @@ const cameraId = urlParams.get("id");
 const checkId = async (id) => {
   const regexID = new RegExp("^[A-Za-z0-9]*$");
   const regexStart = new RegExp("^5be");
-  const isIdCorrect = id.match(regexID) && id.match(regexStart);
+  const isIdCorrect = regexID.test(id) && regexStart.test(id);
   if (isIdCorrect) {
     const cameras = await getAllCameras();
     const cameraFound = cameras.some((camera) => camera._id === id);

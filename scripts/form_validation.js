@@ -29,7 +29,6 @@ const submitForm = async () => {
   camerasInCart.forEach((camera) => {
     ordersId.push(camera.cameraId);
   });
-  formInputs.forEach((input) => console.log(input.value));
   const contact = {
     firstName: clientName.value,
     lastName: clientLastName.value,
@@ -38,19 +37,22 @@ const submitForm = async () => {
     city: clientCity.value,
   };
   const dataToSend = { contact: contact, products: ordersId };
-  console.log(dataToSend, "data");
-  const sendData = async () => {
-    const rawResponse = await fetch("http://localhost:3000/api/cameras/order", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-    });
-    const content = await rawResponse.json();
-    // regex check [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
-    console.log(content);
-  };
-  await sendData();
+  console.log(dataToSend, "data sent");
+
+  const rawResponse = await fetch("http://localhost:3000/api/cameras/order", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dataToSend),
+  });
+
+  const orderResponse = await rawResponse.json();
+  console.log(orderResponse);
+  const regexUUID = new RegExp(
+    "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+  );
+  const isOrderIdCorrect = regexUUID.test(orderResponse.orderId);
+  console.log(isOrderIdCorrect);
 };
