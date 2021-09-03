@@ -49,15 +49,15 @@
       </section>
       <section id='form'>
         <div class="container">
-          <form class="invisible row" id='cartForm'>
+          <form class="invisible row" id='cartForm' onsubmit=" submitForm(); return false">
             <h3 class="mt-5 mb-4">Order form</h3>
             <div class="mb-3 col-md-6">
               <label for="clientName" class="form-label">First Name</label>
-              <input type="text" onchange="displayBtn()" required  class="form-control" minlength="2" id="clientName" pattern="[A-Za-z' -]+">
+              <input type="text" onchange="displayBtn()" required  class="form-control" minlength="2" id="clientName" pattern="[À-ŸA-Za-z' -]+">
             </div>
             <div class="mb-3 col-md-6">
               <label for="clientLastName" class="form-label">Last name</label>
-              <input type="text" onchange="displayBtn()"  required class="form-control" minlength="2" id="clientLastName" pattern="[A-Za-z' -]+">
+              <input type="text" onchange="displayBtn()"  required class="form-control" minlength="2" id="clientLastName" pattern="[À-ŸA-Za-z' -]+">
             </div>
             <div class="mb-3 col-12">
               <label for="clientEmail" class="form-label">Email address</label>
@@ -79,7 +79,7 @@
               <input type="number" onchange="displayBtn()" required placeholder="35200" class="form-control" id="clientZip">
             </div>
             <div class="col-12 mb-5">
-              <button id='submitFormBtn' onclick="submitForm()" type="button" class="btn btn-primary disabled">Submit</button></div>
+              <button id='submitFormBtn' type="submit" class="btn btn-primary disabled">Submit</button></div>
           </form>
         </div>
       </section>
