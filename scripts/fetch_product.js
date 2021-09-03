@@ -1,4 +1,4 @@
-import { getCameraData, getCamerasData } from "../modules/getCameras.js";
+import { getOneCamera, getAllCameras } from "../modules/getCameras.js";
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -8,7 +8,7 @@ const checkId = async (id) => {
   const regexID = new RegExp("^[A-Za-z0-9]*$");
   const isIdCorrect = id.match(regexID);
   if (isIdCorrect) {
-    const cameras = await getCamerasData();
+    const cameras = await getAllCameras();
     const cameraFound = cameras.some((camera) => camera._id === id);
     if (cameraFound) {
       return true;
@@ -88,7 +88,7 @@ const displayCamera = (camera) => {
 
 const checkIdAndDisplayCamera = async () => {
   if (await checkId(cameraId)) {
-    getCameraData(cameraId).then((camera) => {
+    getOneCamera(cameraId).then((camera) => {
       displayCamera(camera);
     });
   } else {

@@ -24,7 +24,7 @@ const getCamerasFromAPI = async () => {
   }
 };
 
-export const getCamerasData = async () => {
+export const getAllCameras = async () => {
   let cameras = JSON.parse(sessionStorage.getItem("camerasData"));
 
   if (!cameras) {
@@ -35,7 +35,7 @@ export const getCamerasData = async () => {
   return cameras;
 };
 
-export const getCameraData = async (cameraId) => {
+export const getOneCamera = async (cameraId) => {
   const camerasData = JSON.parse(sessionStorage.getItem("camerasData"));
   let cameraInfos;
   if (camerasData) {
