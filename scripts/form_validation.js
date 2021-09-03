@@ -49,7 +49,7 @@ const submitForm = async () => {
       body: JSON.stringify(dataToSend),
     });
     const content = await rawResponse.json();
-
+    // regex check [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
     console.log(content);
   };
   await sendData();
